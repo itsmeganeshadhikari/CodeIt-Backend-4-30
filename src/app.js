@@ -1,7 +1,10 @@
 const express = require("express");   // creating express server
+const userRoute = require("./routes/user.route");
 const dotenv = require("dotenv").config();   // to include env file in this code
 
 const app = express();
+app.use(express.json())
+app.use("/api",userRoute);
 
 app.get("/", (req, res) => {
     res.send({ data: [{ name: "Rohan" }] });
