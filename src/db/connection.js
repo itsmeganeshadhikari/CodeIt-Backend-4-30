@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose")
-const dotenv =  require('dotenv').config()
+const dotenv = require('dotenv').config()
 var debug = require('debug')('http')
-const db_connect = async() => {
+const db_connect = async () => {
   try {
     const conn = await mongoose.connect(encodeURI(process.env.CONNECTION), {
       useNewUrlParser: true,
