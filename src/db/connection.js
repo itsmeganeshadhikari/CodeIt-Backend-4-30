@@ -7,8 +7,11 @@ const db_connect = async() => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    console.log(conn);
+    conn.connections.map((e)=>{
+      console.log(`Mongodb connected on port ${e.port} and database name ${e.name}`);
+    })
     return conn;
+
   } catch (error) {
     debug('error')
     console.log('error');
