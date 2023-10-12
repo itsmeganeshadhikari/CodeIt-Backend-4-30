@@ -1,31 +1,19 @@
-const mongoose = require('mongoose')
-const debug = require('debug')('db_connect ')
-
-const db_connect = () => {
+const { default: mongoose } = require("mongoose")
+const dotenv = require('dotenv').config()
+var debug = require('debug')('http')
+const db_connect = async () => {
   try {
-    // use encodeURI to have password having special characters
-    mongoose.connect(encodeURI(process.env.DB_CONNECT), {
+    const conn = await mongoose.connect(encodeURI(process.env.DB_SERVER), {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-
-    conn.on('connected', () => {
-      debug('DB CONNECTED')
-    })
-
-    conn.on('error', (err) => {
-      debug(`DB CONNECTION ERROR  ${err}`)
-      process.exit(0)
-    })
-
-    conn.on('disconnected', () => {
-      debug('DB DISCONNECTED')
-    })
-
-    return conn
+    console.log(conn);
+    return conn;
   } catch (error) {
-    debug({ message: error.message })
+    debug('error')
+    console.log('error');
   }
+  return ''
 }
 
-module.exports = db_connect
+module.exports = db_connect;

@@ -3,7 +3,7 @@ const { getUser, createUser, deleteUser, updateUser } = require('../controllers/
 const userRoute = express.Router();
 
 userRoute.get('/user', getUser);   // joining route with controller
-userRoute.post('/user/:id', createUser);
+userRoute.post('/user/', createUser);
 userRoute.put('/user/:id', updateUser);
 userRoute.delete('/user/:id', deleteUser);
 
