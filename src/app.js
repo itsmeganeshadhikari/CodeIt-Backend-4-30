@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());  // used to get data from post user
 app.use('/api', userRoute);
-app.use('/pro',productRoute);
+app.use('/pro', productRoute);
 db_connect();
 
 module.exports = app;
