@@ -15,14 +15,47 @@ exports.createUser = async(req, res)=>{
     }
 }
 
-exports.getUser =(req, res) =>{
-res.send({data:"Get user"})
+exports.getUser =async(req, res) =>{
+    try {
+        const user = await User.find();
+        res.status(200).send({data:user})
+    } catch (error) {
+        res.send({error:error})
+    }
 }
 
-exports.updateUser = (req, res) =>{
-    console.log('update user');
+exports.updateUser = async(req, res) =>{
+    const id =  req.params.id;
+    console.log(id);
+    try {
+        const newUser =  req.body;
+        const userToBeUpdate =  await User.findById({_id:id});
+        if(!userToBeUpdate){
+            res.status(404).send({message:"User id not found"});
+        }
+        const updateUser =  await User.findOneAndUpdate({_id:id},
+            {$set:{...newUser}},{new:true});
+        if(!updateUser){
+            throw new Error('Error on update')
+        }
+        res.status(200).send({message:"user update"})
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-exports.deleteUser = () =>{
-    console.log('Delete user');
+exports.deleteUser = async(req, res) =>{
+    try {
+        const id = req.params.id;
+        console.log(id);
+        const user = await User.findById({_id:id});
+        if(!user){
+            throw new Error({message:'User id does not exist'});
+        }
+        const deletedUser = await user.deleteOne();
+        res.status(200).send({deletedUser})
+    } catch (error) {
+        console.log(error.name);
+        res.status(404).send("error")
+    }
 }

@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
         trim:true,
         min:[6,'Must be minium of six character long'],
         max:[20,'Must not be more than twenty character']
+    },
+    role:{
+        type: mongoose.Schema.Types.ObjectId
     }
 });
 
