@@ -1,7 +1,14 @@
 //User controller
 
 const { generatePassword } = require("../lib/utils");
+const { loginWithJwt } = require("../middlewares/auth");
 const User = require("../models/Users")
+
+
+exports.login =async(email, req, res) =>{
+    const token = await loginWithJwt(email);
+    res.status(200).send({token:token})
+}
 
 exports.createUser = async(req, res)=>{
     //database save
@@ -26,7 +33,6 @@ exports.getUser =async(req, res) =>{
 
 exports.updateUser = async(req, res) =>{
     const id =  req.params.id;
-    console.log(id);
     try {
         const newUser =  req.body;
         const userToBeUpdate =  await User.findById({_id:id});
