@@ -7,3 +7,16 @@ exports.generatePassword = async(password)=>{
         console.log(error);
     }
 }
+
+exports.validatePassword = async(a,b) =>{
+    try {
+        const isValid =  await bcrypt.compare(a,b);
+        if(isValid){
+            return true
+        }else{
+            return false
+        }
+    } catch (error) {
+        return false
+    }
+}
