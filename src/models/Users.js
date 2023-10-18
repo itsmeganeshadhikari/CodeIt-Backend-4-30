@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
         max:[20,'Must not be more than twenty character']
     },
     role:{
-        type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role'
     }
 });
 

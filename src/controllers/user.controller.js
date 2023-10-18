@@ -24,7 +24,7 @@ exports.createUser = async(req, res)=>{
 
 exports.getUser =async(req, res) =>{
     try {
-        const user = await User.find();
+        const user = await User.find().populate('role');
         res.status(200).send({data:user})
     } catch (error) {
         res.send({error:error})
