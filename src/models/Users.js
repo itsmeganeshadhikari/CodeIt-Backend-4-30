@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Role'
-    }
+    } //todo one user may have multiple role
 });
 
 const User=  mongoose.model('User',userSchema);

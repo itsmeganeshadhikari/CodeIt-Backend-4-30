@@ -1,12 +1,11 @@
 //User controller
-
 const { generatePassword } = require("../lib/utils");
 const { loginWithJwt } = require("../middlewares/auth");
 const User = require("../models/Users")
 
 
 exports.login =async(email, req, res) =>{
-    const token = await loginWithJwt(email);
+    const token = await loginWithJwt(email); //todo token must be stored in local storage
     res.status(200).send({token:token})
 }
 
